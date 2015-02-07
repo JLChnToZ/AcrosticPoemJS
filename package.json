@@ -24,6 +24,7 @@
     "express": "^4.11.2",
     "express-minify": "^0.1.2",
     "jsonfile": "^2.0.0",
-    "underscore-plus": "^1.6.6"
+    "start-stop-daemon": "^0.1.0",
+    "underscore": "^1.7.0"
   }
 }
