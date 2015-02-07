@@ -128,16 +128,16 @@ class PoemGen
     for wStart, i in wordYun
       preAry = viterbi wStart, @length, itvalDict[i]
       for w of preAry
-        yun = dict[w].yun
-        lastWordAry = _.reduce (yunAry[yun][j].word[-1...] for j in [0..i]), ((x, y) -> x.concat y), []
-        if preAry[w].prob > yunAry[yun][i].prob and lastWordAry.indexOf(w) < 0
-          yunAry[yun][i].prob = preAry[w].prob
-          yunAry[yun][i].word = preAry[w].word.concat [w]
+        _yun = dict[w].yun
+        lastWordAry = _.reduce (yunAry[_yun][j].word[-1...] for j in [0..i]), ((x, y) -> x.concat y), []
+        if preAry[w].prob > yunAry[_yun][i].prob and lastWordAry.indexOf(w) < 0
+          yunAry[_yun][i].prob = preAry[w].prob
+          yunAry[_yun][i].word = preAry[w].word.concat [w]
     yunKeyAry = []
-    for yun, yunValue of yunAry
-      yunProbProduct = _.reduce _.map(yunAry[yun], (x) -> x.prob), ((x, y) -> x * y), 1
-      yunProbNotEmpty = _.reduce _.map(yunAry[yun], (x) -> x.word.length isnt 0), (x, y) -> x and y
-      yunKeyAry.push [yun, yunProbProduct] if yunProbNotEmpty
+    for _yun, yunValue of yunAry
+      yunProbProduct = _.reduce _.map(yunAry[_yun], (x) -> x.prob), ((x, y) -> x * y), 1
+      yunProbNotEmpty = _.reduce _.map(yunAry[_yun], (x) -> x.word.length isnt 0), (x, y) -> x and y
+      yunKeyAry.push [_yun, yunProbProduct] if yunProbNotEmpty
     yunKeyAry.sort (a, b) -> b[1] - a[1]
     resultYunKey = randomItem yunKeyAry, offset
     resultRaw = yunAry[resultYunKey[0]]
